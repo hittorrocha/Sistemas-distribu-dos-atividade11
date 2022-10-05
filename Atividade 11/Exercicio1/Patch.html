@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch</title>
+    <style>
+        html,
+        body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+        }
+        main {
+        width: 51rem;
+        margin: 1rem auto;
+        }
+        input[type="number"],
+        button {
+        text-align: right;
+        padding: 0.5rem;
+        }
+        input[type="number"] {
+        width: 10rem;
+        margin-bottom: 0.5rem;
+        }
+        button {
+        margin-bottom: 0.5rem;
+        }
+        #resp {
+        padding: 0.5rem;
+        background-color: orangered;
+        color: white;
+        width: 50rem;
+        }
+
+        .campo {
+        color: yellow;
+        font-weight: bold;
+        }
+    </style>
+    <script>
+        function imprime(objeto) {
+        var mensagem = `
+        <br>
+        {
+        <br>
+        "<span class='campo'>id</span>": ${objeto.id},
+        <br>
+        "<span class='campo'>userId</span>": ${objeto.userId},
+        <br>
+        "<span class='campo'>title</span>": ${objeto.title},
+        <br>
+        "<span class='campo'>body</span>": ${objeto.body}
+        <br>
+        }
+        <br>`
+        return mensagem;
+        }
+        async function modificarPostagens(id) {
+        fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        method: 'PATCH',
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({
+        title: 'Essa é a modificação da minha mais nova postagem! :D',
+        }),
+        })
+        .then((response) => response.json())
+        .then((json) => {
+        console.log(json);
+        respjson.innerHTML = imprime(json);
+        });
+        }
+    </script>
+</head>
+<body>
+    
+    <a href="index.html">Voltar</a>
+    <main>
+
+        <h1>Postagens</h1>
+        <input id="numero" type="number" min="1" max="100" value="1">
+        <button onclick="modificarPostagens(numero.value)">Modificar</button>
+        <div id="resp">
+            <p class="campo">Resposta:</p>
+            <p id="respjson"></p>
+        </div>
+    </main>
+</body>
+</html>

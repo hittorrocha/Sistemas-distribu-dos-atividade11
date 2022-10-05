@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>Exercicio 3</title>
+	<link rel="stylesheet" type="text/css"  href="estilo.css" />
+  	<script>
+		
+		async function consultar() {
+			fetch('https://dummyjson.com/products/1')
+			.then(res => res.json())
+			.then(json => console.log(json))
+        	
+        };
+        
+		
+	</script>
+</head>
+<body>
+
+	<main>
+        <h1>Consultas</h1>
+        
+        <button onclick="consultar()">Consultar</button>
+        <div id="resp">
+            <p class="campo">Resposta:</p>
+            <p id="respjson"></p>
+        </div>
+    </main>
+
+</body>
+</html>
